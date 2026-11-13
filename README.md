@@ -1,55 +1,33 @@
 # SCIM Provisioning Simulator
 
-A simulator for SCIM 2.0 user lifecycle provisioning between an HR
-source-of-truth roster and multiple target applications. It runs a full
-joiner / mover / leaver sync cycle, models the failure modes that occur in
-real identity onboarding projects, and produces the findings a governance
-review actually cares about: **orphaned active accounts for leavers,
-attribute drift, and duplicate accounts** — plus a per-application
-reconciliation of HR identities against application accounts.
+This simulates SCIM 2.0 user lifecycle provisioning between an HR source-of-truth roster and multiple target applications. It runs a full joiner / mover / leaver sync cycle, models the failure modes that show up in real identity onboarding projects, and produces the findings a governance review actually cares about: **orphaned active accounts for leavers, attribute drift, and duplicate accounts**. It also does a per-application reconciliation of HR identities against application accounts.
 
 ## The problem it solves
 
-In production IdP deployments (Okta, Entra ID, SailPoint, etc.), provisioning
-failures are quiet: a deprovisioning call times out, a required attribute is
-missing in the HR feed, a schema mismatch blocks an update. The sync job
-"completes" — but a terminated administrator still has an active account, or
-a transferred employee's entitlements still reflect their old department.
-This tool reproduces that failure surface in a safe, offline sandbox so
-identity engineers and auditors can study, demonstrate, and test detection
-of provisioning defects before they become access-review findings.
+In production IdP deployments (Okta, Entra ID, SailPoint, etc.), provisioning failures are quiet. A deprovisioning call times out. A required attribute is missing in the HR feed. A schema mismatch blocks an update. The sync job "completes", but a terminated administrator still has an active account, or a transferred employee's entitlements still reflect their old department. This tool reproduces that failure surface in a safe, offline sandbox so identity engineers and auditors can study it, demonstrate it, and test detection of provisioning defects before they become access-review findings.
 
 ## What it demonstrates
 
-- Joiner–Mover–Leaver lifecycle automation driven by an HR source of truth
-- Connector-style failure handling: API errors (500/503), schema validation
-  errors (400), and missing required attributes
-- Consequence analysis: failed deprovisioning of a privileged leaver is a
-  **Critical** orphan; failed creates and unresolved attribute drift are
-  reported with root cause
-- Reconciliation that compares **identity sets**, not just counts — a failed
-  create plus a failed deprovision cancel out numerically while the account
-  population is still wrong (see Payroll in the demo output)
+- Joiner-Mover-Leaver lifecycle automation driven by an HR source of truth
+- Connector-style failure handling: API errors (500/503), schema validation errors (400), and missing required attributes
+- Consequence analysis: failed deprovisioning of a privileged leaver is a **Critical** orphan; failed creates and unresolved attribute drift are reported with root cause
+- Reconciliation that compares **identity sets**, not just counts. A failed create plus a failed deprovision cancel out numerically while the account population is still wrong (see Payroll in the demo output)
 
 ## How to run
 
-Demo mode (bundled fictional sample data — 8-person HR roster, 3 target
-apps, with failure cases built in):
+Demo mode (bundled fictional sample data: 8-person HR roster, 3 target apps, with failure cases built in):
 
 ```bash
 python3 simulator.py --demo
 ```
 
-Real usage — supply your own files in the same JSON formats as
-`sample_data/hr_roster.json` and `sample_data/apps.json`:
+Real usage: supply your own files in the same JSON formats as `sample_data/hr_roster.json` and `sample_data/apps.json`:
 
 ```bash
 python3 simulator.py --hr path/to/roster.json --apps path/to/apps.json
 ```
 
-Requirements: Python 3.8+, standard library only. No network access is
-performed; target application "API calls" are simulated and failures are
-driven by the `simulated_failures` entries in the apps file.
+Requirements: Python 3.8+, standard library only. No network access is performed. Target application "API calls" are simulated and failures are driven by the `simulated_failures` entries in the apps file.
 
 ## Demo output (actual run)
 
@@ -109,25 +87,15 @@ Findings by severity: Critical=1, High=1, Medium=4, Low=0
 Orphaned active accounts (leavers still able to sign in): 2
 ```
 
-Note the Payroll row: the counts match (5 = 5) yet the status is MISMATCH,
-because one joiner was never created and one leaver was never deprovisioned.
-Count-based reconciliation alone would have passed this application.
+Note the Payroll row: the counts match (5 = 5) yet the status is MISMATCH, because one joiner was never created and one leaver was never deprovisioned. Count-based reconciliation alone would have passed this application.
 
 ## Design notes and limitations
 
-- Failures are **data-driven**: each target app declares
-  `simulated_failures` (action + employee_id + error), which mirrors how a
-  real connector surfaces per-object errors in a sync log.
-- Severity model: an orphaned account is Critical if the account is
-  privileged, High otherwise; create failures and drift are Medium. This is
-  a deliberately simple model — production IGA tools layer in entitlement
-  criticality, dormancy, and last-login data.
-- The simulator models SCIM semantics (create/update/deactivate via
-  `active=false`) but does not implement the SCIM HTTP protocol, filtering,
-  or pagination; group/entitlement provisioning is out of scope.
-- Sample data is entirely fictional. Any resemblance to real people or
-  organisations is coincidental.
+- Failures are **data-driven**: each target app declares `simulated_failures` (action + employee_id + error), which mirrors how a real connector surfaces per-object errors in a sync log.
+- Severity model: an orphaned account is Critical if the account is privileged, High otherwise; create failures and drift are Medium. This is a deliberately simple model. Production IGA tools layer in entitlement criticality, dormancy, and last-login data.
+- The simulator models SCIM semantics (create/update/deactivate via `active=false`) but does not implement the SCIM HTTP protocol, filtering, or pagination; group/entitlement provisioning is out of scope.
+- Sample data is entirely fictional. Any resemblance to real people or organisations is coincidental.
 
 ## License
 
-MIT — see `LICENSE`.
+MIT: see `LICENSE`.
