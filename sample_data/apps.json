@@ -1,0 +1,170 @@
+[
+  {
+    "accounts": [
+      {
+        "active": true,
+        "department": "Engineering",
+        "employee_id": "E1001",
+        "privileged": false,
+        "title": "Senior Engineer",
+        "user_name": "amara.osei@example.com"
+      },
+      {
+        "active": true,
+        "department": "Finance",
+        "employee_id": "E1003",
+        "privileged": false,
+        "title": "Senior Financial Analyst",
+        "user_name": "priya.nair@example.com"
+      },
+      {
+        "active": true,
+        "department": "IT",
+        "employee_id": "E1004",
+        "privileged": true,
+        "title": "System Administrator",
+        "user_name": "marcus.webb@example.com"
+      },
+      {
+        "active": true,
+        "department": "Support",
+        "employee_id": "E1005",
+        "privileged": false,
+        "title": "Support Specialist",
+        "user_name": "lena.fischer@example.com"
+      },
+      {
+        "active": true,
+        "department": "Engineering",
+        "employee_id": "E1006",
+        "privileged": true,
+        "title": "DevOps Engineer",
+        "user_name": "tom.okafor@example.com"
+      },
+      {
+        "active": true,
+        "department": "Engineering",
+        "employee_id": "E1008",
+        "privileged": false,
+        "title": "QA Engineer",
+        "user_name": "james.park@example.com"
+      }
+    ],
+    "name": "Email Suite",
+    "required_attributes": [
+      "email"
+    ],
+    "simulated_failures": [
+      {
+        "action": "deprovision",
+        "employee_id": "E1004",
+        "error": "API 500: directory connector timeout"
+      }
+    ]
+  },
+  {
+    "accounts": [
+      {
+        "active": true,
+        "department": "Engineering",
+        "employee_id": "E1001",
+        "privileged": false,
+        "title": "Senior Engineer",
+        "user_name": "amara.osei@example.com"
+      },
+      {
+        "active": true,
+        "department": "Accounting",
+        "employee_id": "E1003",
+        "privileged": false,
+        "title": "Financial Analyst",
+        "user_name": "priya.nair@example.com"
+      },
+      {
+        "active": true,
+        "department": "Support",
+        "employee_id": "E1005",
+        "privileged": false,
+        "title": "Support Specialist",
+        "user_name": "lena.fischer@example.com"
+      },
+      {
+        "active": true,
+        "department": "Engineering",
+        "employee_id": "E1006",
+        "privileged": true,
+        "title": "DevOps Engineer",
+        "user_name": "tom.okafor@example.com"
+      }
+    ],
+    "duplicate_accounts": [
+      {
+        "employee_id": "E1002",
+        "user_names": [
+          "daniel.reyes@example.com",
+          "d.reyes@example.com"
+        ]
+      }
+    ],
+    "name": "CRM",
+    "required_attributes": [
+      "email",
+      "cost_center"
+    ],
+    "simulated_failures": [
+      {
+        "action": "update",
+        "employee_id": "E1003",
+        "error": "API 400: attribute 'costCenter' rejected by target schema"
+      }
+    ]
+  },
+  {
+    "accounts": [
+      {
+        "active": true,
+        "department": "Engineering",
+        "employee_id": "E1001",
+        "privileged": false,
+        "title": "Senior Engineer",
+        "user_name": "amara.osei@example.com"
+      },
+      {
+        "active": true,
+        "department": "Finance",
+        "employee_id": "E1003",
+        "privileged": false,
+        "title": "Senior Financial Analyst",
+        "user_name": "priya.nair@example.com"
+      },
+      {
+        "active": true,
+        "department": "Engineering",
+        "employee_id": "E1006",
+        "privileged": true,
+        "title": "DevOps Engineer",
+        "user_name": "tom.okafor@example.com"
+      },
+      {
+        "active": true,
+        "department": "Engineering",
+        "employee_id": "E1008",
+        "privileged": false,
+        "title": "QA Engineer",
+        "user_name": "james.park@example.com"
+      }
+    ],
+    "name": "Payroll",
+    "required_attributes": [
+      "email",
+      "cost_center"
+    ],
+    "simulated_failures": [
+      {
+        "action": "deprovision",
+        "employee_id": "E1008",
+        "error": "API 503: upstream service unavailable"
+      }
+    ]
+  }
+]

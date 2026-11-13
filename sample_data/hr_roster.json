@@ -1,0 +1,84 @@
+[
+  {
+    "cost_center": "CC-4100",
+    "department": "Engineering",
+    "email": "amara.osei@example.com",
+    "employee_id": "E1001",
+    "name": "Amara Osei",
+    "privileged": false,
+    "status": "active",
+    "title": "Senior Engineer"
+  },
+  {
+    "department": "Sales",
+    "email": "daniel.reyes@example.com",
+    "employee_id": "E1002",
+    "name": "Daniel Reyes",
+    "privileged": false,
+    "status": "active",
+    "title": "Account Executive"
+  },
+  {
+    "cost_center": "CC-3100",
+    "department": "Finance",
+    "email": "priya.nair@example.com",
+    "employee_id": "E1003",
+    "name": "Priya Nair",
+    "privileged": false,
+    "status": "active",
+    "title": "Senior Financial Analyst"
+  },
+  {
+    "cost_center": "CC-4000",
+    "department": "IT",
+    "email": "marcus.webb@example.com",
+    "employee_id": "E1004",
+    "name": "Marcus Webb",
+    "privileged": true,
+    "status": "terminated",
+    "termination_date": "2026-10-15",
+    "title": "System Administrator"
+  },
+  {
+    "cost_center": "CC-5100",
+    "department": "Support",
+    "email": "lena.fischer@example.com",
+    "employee_id": "E1005",
+    "name": "Lena Fischer",
+    "privileged": false,
+    "status": "terminated",
+    "termination_date": "2026-11-02",
+    "title": "Support Specialist"
+  },
+  {
+    "cost_center": "CC-4100",
+    "department": "Engineering",
+    "email": "tom.okafor@example.com",
+    "employee_id": "E1006",
+    "name": "Tom Okafor",
+    "privileged": true,
+    "status": "active",
+    "title": "DevOps Engineer"
+  },
+  {
+    "cost_center": "CC-1100",
+    "department": "People",
+    "email": "sofia.marino@example.com",
+    "employee_id": "E1007",
+    "name": "Sofia Marino",
+    "privileged": false,
+    "status": "active",
+    "title": "HR Coordinator"
+  },
+  {
+    "cost_center": "CC-4100",
+    "department": "Engineering",
+    "email": "james.park@example.com",
+    "employee_id": "E1008",
+    "name": "James Park",
+    "privileged": false,
+    "status": "terminated",
+    "termination_date": "2026-10-28",
+    "title": "QA Engineer"
+  }
+]
